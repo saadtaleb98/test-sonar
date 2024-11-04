@@ -19,7 +19,7 @@ pipeline {
                 checkout scm
             }
         }
-
+    }
 
      
 
