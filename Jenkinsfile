@@ -21,6 +21,12 @@ pipeline {
         }
     }
 
+     stage('SonarQube Analysis') {
+    def mvn = tool 'sonar-scanner';
+    withSonarQubeEnv() {
+      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=foyer -Dsonar.projectName='foyer'"
+    }
+  }
      
 
 }
