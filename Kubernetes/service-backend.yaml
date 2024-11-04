@@ -1,0 +1,13 @@
+# service-backend-nodeport.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: dorm-backend
+spec:
+  type: NodePort  # Type de service pour exposer le service sur un port de nœud
+  ports:
+    - port: 8089       # Port externe du service
+      targetPort: 8089 # Port du conteneur que le service cible
+      nodePort: 30000  # Port que vous voulez assigner sur le nœud (facultatif, sinon Kubernetes choisira un port)
+  selector:
+    app: dorm  # Doit correspondre aux labels du déploiement

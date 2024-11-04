@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Remplacez par un mot de passe sécurisé
+    volumes:
+      - mysql_data:/var/lib/mysql           # Volume de stockage pour les données MySQL
+    networks:
+      - app-network                          # Réseau personnalisé
+
+  dorm:
+    image: saadtaleb25314/dorm
+    container_name: dorm
+    ports:
+      - "8089:8089"                         # Mappe le port 8089
+    depends_on:
+      - mysql                               # Assure que MySQL est démarré avant
+    networks:
+      - app-network                          # Réseau personnalisé
+
+volumes:
+  mysql_data:                                # Définition du volume pour MySQL
+
+networks:
+  app-network:                                # Définition du réseau personnalisé

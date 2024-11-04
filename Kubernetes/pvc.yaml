@@ -1,0 +1,12 @@
+# pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi  # Correspond à la taille du PV
+  storageClassName: local-storage  # Doit correspondre au PV

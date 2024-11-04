@@ -1,0 +1,22 @@
+# pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 1Gi  # Taille du volume (1Go)
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage  # Classe de stockage sans provisionneur dynamique
+  local:
+    path: /mnt/data/mysql  # Chemin local sur le nœud
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - ip-172-31-30-7.ec2.internal # Remplacez par le nom de votre nœud où le PV doit être monté
